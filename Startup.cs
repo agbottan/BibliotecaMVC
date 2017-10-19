@@ -66,6 +66,8 @@ namespace BibliotecaMVC
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            /* !!!-1
+            */
             DbInitializer.Initialize(context);
         }
     }
