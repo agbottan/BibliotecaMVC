@@ -36,6 +36,7 @@ namespace BibliotecaMVC.Data.Migrations
                 column: "NormalizedName",
                 unique: true);
 
+            /* !!!-2
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                 table: "AspNetUserTokens",
@@ -43,6 +44,7 @@ namespace BibliotecaMVC.Data.Migrations
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
+            */
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
