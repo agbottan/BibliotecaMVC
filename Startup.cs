@@ -67,8 +67,8 @@ namespace BibliotecaMVC
             });
 
             /* !!!-1
-            DbInitializer.Initialize(context);
             */
+            DbInitializer.Initialize(context);
         }
     }
 }
