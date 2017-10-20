@@ -15,43 +15,45 @@ namespace BibliotecaMVC.Data
 
             // ------------------ Adiciona os LIVROS ------------------
 
-            // Se existir algum livro
-            if (context.Livro.Any())
+            // Se não existir nenhum livro
+            if (!context.Livro.Any())
             {
-                return;   // DB possui registros
-            }
+                var livros = new Livro[]
+                {
+                    new Livro { Titulo = "PHP para quem conhece PHP",                            Quantidade = 10 },
+                    new Livro { Titulo = "Internet das Coisas com ESP8266, Arduino e Raspberry", Quantidade = 10 },
+                    new Livro { Titulo = "Gamification em Help Desk e Service Desk",             Quantidade = 10 },
+                    new Livro { Titulo = "Avaliação de segurança de redes",                      Quantidade = 10 },
+                    new Livro { Titulo = "Desenvolvendo Jogos Mobile com HTML5",                 Quantidade = 10 }
+                };
 
-            var livros = new Livro[]
-            {
-                new Livro { Titulo = "PHP para quem conhece PHP",                            Quantidade = 10 },
-                new Livro { Titulo = "Internet das Coisas com ESP8266, Arduino e Raspberry", Quantidade = 10 },
-                new Livro { Titulo = "Gamification em Help Desk e Service Desk",             Quantidade = 10 },
-                new Livro { Titulo = "Avaliação de segurança de redes",                      Quantidade = 10 },
-                new Livro { Titulo = "Desenvolvendo Jogos Mobile com HTML5",                 Quantidade = 10 }
-            };
-
-            foreach (Livro l in livros)
-            {
-                context.Livro.Add(l);
+                foreach (Livro l in livros)
+                {
+                    context.Livro.Add(l);
+                }
             }
 
 
             // ------------------ Adiciona os AUTORES ------------------
 
-            var autores = new Autor[]
+            // Se não existir nenhum autor
+            if (!context.Autor.Any())
             {
-                new Autor { Nome = "Sérgio de Oliveira" },
-                new Autor { Nome = "Renato da Silva" },
-                new Autor { Nome = "Paulo Sérgio Travolla" },
-                new Autor { Nome = "Juliano Niederaure" },
-                new Autor { Nome = "Roberto Cohen" },
-                new Autor { Nome = "Cris McNab" },
-                new Autor { Nome = "Luiz Fernando Estevarengo" }
-            };
+                var autores = new Autor[]
+                {
+                    new Autor { Nome = "Sérgio de Oliveira" },
+                    new Autor { Nome = "Renato da Silva" },
+                    new Autor { Nome = "Paulo Sérgio Travolla" },
+                    new Autor { Nome = "Juliano Niederaure" },
+                    new Autor { Nome = "Roberto Cohen" },
+                    new Autor { Nome = "Cris McNab" },
+                    new Autor { Nome = "Luiz Fernando Estevarengo" }
+                };
 
-            foreach (Autor a in autores)
-            {
-                context.Autor.Add(a);
+                foreach (Autor a in autores)
+                {
+                    context.Autor.Add(a);
+                }
             }
 
 
