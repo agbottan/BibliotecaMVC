@@ -1,13 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-
-using System.ComponentModel.DataAnnotations;
-/*
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Http;
-*/
 
 namespace BibliotecaMVC.Models
 {
@@ -24,18 +19,10 @@ namespace BibliotecaMVC.Models
         [Range(1, 300, ErrorMessage = "O campo {0} deve estar entre {1} e {2}")]
         public int Quantidade { get; set; }
 
-        /*
         public string Foto { get; set; }
 
         public ICollection<LivroAutor> LivroAutor { get; set; }
 
         public ICollection<LivroEmprestimo> LivroEmprestimo { get; set; }
-
-        [NotMapped]
-        public IFormFile FotoFile { get; set; }
-
-        //[DataType(DataType.Upload)]
-        //HttpPostedFileBase ImageUpload { get; set; }
-        */
     }
 }
