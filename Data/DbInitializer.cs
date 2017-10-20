@@ -57,6 +57,23 @@ namespace BibliotecaMVC.Data
             }
 
 
+            // ------------------ Adiciona os USUÁRIOS ------------------
+
+            // Se não existir nenhum usuário
+            if (!context.Usuario.Any())
+            {
+                var usuarios = new Usuario[]
+                {
+                    new Usuario { Nome = "Teste", Email = "teste@teste.com", Senha = "abc123" }
+                };
+
+                foreach (Usuario u in usuarios)
+                {
+                    context.Usuario.Add(u);
+                }
+            }
+
+
             // ------------------ Salva tudo ------------------
 
             context.SaveChanges();

@@ -19,6 +19,7 @@ namespace BibliotecaMVC.Data.Migrations
                 table: "Emprestimo",
                 column: "ApplicationUserId");
 
+            /*
             migrationBuilder.AddForeignKey(
                 name: "FK_Emprestimo_AspNetUsers_ApplicationUserId",
                 table: "Emprestimo",
@@ -26,6 +27,7 @@ namespace BibliotecaMVC.Data.Migrations
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
+            */
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
