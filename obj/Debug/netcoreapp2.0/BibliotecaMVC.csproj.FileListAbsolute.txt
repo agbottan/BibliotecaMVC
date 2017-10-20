@@ -1,4 +1,3 @@
-/home/andre/Documents/Projetos/Pós Graduação/Dot-Net/BibliotecaMVC/bin/Debug/netcoreapp2.0/app.db
 /home/andre/Documents/Projetos/Pós Graduação/Dot-Net/BibliotecaMVC/bin/Debug/netcoreapp2.0/BibliotecaMVC.deps.json
 /home/andre/Documents/Projetos/Pós Graduação/Dot-Net/BibliotecaMVC/bin/Debug/netcoreapp2.0/BibliotecaMVC.runtimeconfig.json
 /home/andre/Documents/Projetos/Pós Graduação/Dot-Net/BibliotecaMVC/bin/Debug/netcoreapp2.0/BibliotecaMVC.runtimeconfig.dev.json
@@ -10,3 +9,4 @@
 /home/andre/Documents/Projetos/Pós Graduação/Dot-Net/BibliotecaMVC/obj/Debug/netcoreapp2.0/BibliotecaMVC.AssemblyInfo.cs
 /home/andre/Documents/Projetos/Pós Graduação/Dot-Net/BibliotecaMVC/obj/Debug/netcoreapp2.0/BibliotecaMVC.dll
 /home/andre/Documents/Projetos/Pós Graduação/Dot-Net/BibliotecaMVC/obj/Debug/netcoreapp2.0/BibliotecaMVC.pdb
+/home/andre/Documents/Projetos/Pós Graduação/Dot-Net/BibliotecaMVC/bin/Debug/netcoreapp2.0/app.db
