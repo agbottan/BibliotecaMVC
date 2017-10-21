@@ -19,7 +19,7 @@ namespace BibliotecaMVC.Data.Migrations
                 table: "Emprestimo",
                 column: "ApplicationUserId");
 
-            /*
+            /* !!!-1
             migrationBuilder.AddForeignKey(
                 name: "FK_Emprestimo_AspNetUsers_ApplicationUserId",
                 table: "Emprestimo",

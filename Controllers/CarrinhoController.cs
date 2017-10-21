@@ -29,6 +29,7 @@ namespace BibliotecaMVC.Controllers
             if (GetCarrinho() == null)
                 SetCarrinho(new List<Livro>());
 
+            //ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
             return View(GetCarrinho());
         }
 
@@ -50,20 +51,20 @@ namespace BibliotecaMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EmprestarLivros()
         {
-            // Verificamos se o usu√°rio est√° logado
+            // Verificamos se o usu·rio est· logado
             if (User.Identity.IsAuthenticated)
             {
 
-                // Pegar ID do Usu√°rio
+                // Pegar ID do Usu·rio
                 var userID = _userManager.GetUserId(HttpContext.User);
 
-                // Criar empr√©stimo
+                // Criar emprÈstimo
                 Emprestimo emprestimo = new Emprestimo()
                 {
                     ApplicationUserId = userID,
                     DataInicio = DateTime.Now.ToString("dd/MM/yyyy"),
                     DataFim = DateTime.Now.AddDays(7).ToString("dd/MM/yyyy"),
-                    UsuarioID = 1, // Fixo p/ n√£o dar erro
+                    UsuarioID = 1, // Fixo p/ n„o dar erro
                     LivroEmprestimo = new List<LivroEmprestimo>()
                 };
 
@@ -80,7 +81,7 @@ namespace BibliotecaMVC.Controllers
                     emprestimo.LivroEmprestimo.Add(livroEmprestimo);
                 }
 
-                // Inserir o novo empr√©stimo na tabela
+                // Inserir o novo emprÈstimo na tabela
                 _context.Add(emprestimo);
                 await _context.SaveChangesAsync();
             }
@@ -102,5 +103,7 @@ namespace BibliotecaMVC.Controllers
             string carrinhoStr = JsonConvert.SerializeObject(carrinho);
             HttpContext.Session.SetString("Carrinho", carrinhoStr);
         }
+
+
     }
 }

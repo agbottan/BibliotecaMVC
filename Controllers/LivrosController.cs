@@ -61,9 +61,9 @@ namespace BibliotecaMVC.Controllers
             }
 
             var livro = await _context.Livro.AsNoTracking()
-                .Include(l => l.LivroAutor)
-                .ThenInclude(li => li.Autor)
-                .SingleOrDefaultAsync(m => m.LivroID == id);
+                              .Include(l => l.LivroAutor)
+                              .ThenInclude(li => li.Autor)
+                              .SingleOrDefaultAsync(m => m.LivroID == id);
 
             if (livro == null)
             {
@@ -78,7 +78,7 @@ namespace BibliotecaMVC.Controllers
         {
             ViewBag.Autores = new Listagens(_context).AutoresCheckBox();
 
-            return View();
+            return View(new Livro());
         }
 
         // POST: Livros/Create
@@ -95,20 +95,13 @@ namespace BibliotecaMVC.Controllers
                     livro.LivroAutor = new List<LivroAutor>();
 
                     foreach (var idAutor in selectedAutores)
-                    livro.LivroAutor.Add(
-                        new LivroAutor()
-                        {
-                            AutorID = int.Parse(idAutor),
-                            Livro = livro
-                        }
-                    );
+                        livro.LivroAutor.Add(new LivroAutor() { AutorID = int.Parse(idAutor), Livro = livro });
                 }
 
                 _context.Add(livro);
                 await _context.SaveChangesAsync();
 
                 livro.Foto = await RealizarUploadImagens(files, livro.LivroID);
-                _context.Update(livro);
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction("Index");
@@ -126,7 +119,12 @@ namespace BibliotecaMVC.Controllers
 
             var autoresAux = new Listagens(_context).AutoresCheckBox();
 
-            var livro = await _context.Livro.Include(l => l.LivroAutor).SingleOrDefaultAsync(m => m.LivroID == id);
+            var livro = await _context.Livro.Include(l => l.LivroAutor)
+                .SingleOrDefaultAsync(m => m.LivroID == id);
+
+            autoresAux.ForEach(a =>
+                                    a.Checked = livro.LivroAutor.Any(l => l.AutorID == a.Value)
+                              );
 
             ViewBag.Autores = autoresAux;
 
@@ -134,6 +132,7 @@ namespace BibliotecaMVC.Controllers
             {
                 return NotFound();
             }
+
             return View(livro);
         }
 
@@ -152,21 +151,18 @@ namespace BibliotecaMVC.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {   
-
+                {
                     var livroAutores = _context.LivroAutor.AsNoTracking().Where(la => la.LivroID == livro.LivroID);
+
                     _context.LivroAutor.RemoveRange(livroAutores);
                     await _context.SaveChangesAsync();
 
                     if (selectedAutores != null)
                     {
                         livro.LivroAutor = new List<LivroAutor>();
+
                         foreach (var idAutor in selectedAutores)
-                            livro.LivroAutor.Add(new LivroAutor()
-                            {
-                                AutorID =int.Parse(idAutor), Livro = livro
-                            }
-                        );
+                            livro.LivroAutor.Add(new LivroAutor() { AutorID = int.Parse(idAutor), Livro = livro });
                     }
 
                     livro.Foto = await RealizarUploadImagens(files, livro.LivroID);
@@ -222,24 +218,23 @@ namespace BibliotecaMVC.Controllers
         {
             return _context.Livro.Any(e => e.LivroID == id);
         }
-///////////////////////////////////////////////////////////////////////////
 
         private async Task<string> RealizarUploadImagens(List<IFormFile> files, int idLivro)
         {
             // Verifica se existem arquivos selecionados
             if (files.Count > 0)
             {
-                // Vari√°vel para armazenar o caminho de upload das imagens
+                // Vari·vel para armazenar o caminho de upload das imagens
                 var pathUpload = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
 
-                // Se o caminho n√£o existe ent√£o cria
+                // Se o caminho n„o existe ent„o cria
                 if (!Directory.Exists(pathUpload))
                     Directory.CreateDirectory(pathUpload);
 
-                // Para cada arquivo fa√ßa
+                // Para cada arquivo faÁa
                 foreach (var file in files)
                 {
-                    // Verifica se o arquivo possui informa√ß√£o
+                    // Verifica se o arquivo possui informaÁ„o
                     if (file.Length > 0)
                     {
                         // Concatena o nome do arquivo
@@ -247,13 +242,13 @@ namespace BibliotecaMVC.Controllers
                         // Concatena o caminho do arquivo
                         var pathFile = Path.Combine(pathUpload, nomeArquivo);
 
-                        // Realiza a c√≥pia
+                        // Realiza a cÛpia
                         using (var fileStream = new FileStream(pathFile, FileMode.Create))
                         {
                             await file.CopyToAsync(fileStream);
                         }
 
-                        // Retorna o caminho do arquivo que ser√° salvo
+                        // Retorna o caminho do arquivo que ser· salvo
                         // no banco de dados
                         return "uploads//" + Path.GetFileName(pathFile);
                     }
@@ -262,6 +257,6 @@ namespace BibliotecaMVC.Controllers
 
             return null;
         }
-///////////////////////////////////////////////////////////////////////////
+
     }
 }
