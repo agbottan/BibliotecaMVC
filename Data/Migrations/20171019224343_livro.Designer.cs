@@ -11,9 +11,10 @@ using System;
 namespace BibliotecaMVC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171019224343_livro")]
+    partial class livro
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,50 +70,10 @@ namespace BibliotecaMVC.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("BibliotecaMVC.Models.Autor", b =>
-                {
-                    b.Property<int>("AutorID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.HasKey("AutorID");
-
-                    b.ToTable("Autor");
-                });
-
-            modelBuilder.Entity("BibliotecaMVC.Models.Emprestimo", b =>
-                {
-                    b.Property<int>("EmprestimoID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ApplicationUserId");
-
-                    b.Property<string>("DataDevolucao");
-
-                    b.Property<string>("DataFim");
-
-                    b.Property<string>("DataInicio");
-
-                    b.Property<int>("UsuarioID");
-
-                    b.HasKey("EmprestimoID");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("UsuarioID");
-
-                    b.ToTable("Emprestimo");
-                });
-
             modelBuilder.Entity("BibliotecaMVC.Models.Livro", b =>
                 {
                     b.Property<int>("LivroID")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Foto");
 
                     b.Property<int>("Quantidade");
 
@@ -123,53 +84,6 @@ namespace BibliotecaMVC.Data.Migrations
                     b.HasKey("LivroID");
 
                     b.ToTable("Livro");
-                });
-
-            modelBuilder.Entity("BibliotecaMVC.Models.LivroAutor", b =>
-                {
-                    b.Property<int>("AutorID");
-
-                    b.Property<int>("LivroID");
-
-                    b.HasKey("AutorID", "LivroID");
-
-                    b.HasIndex("LivroID");
-
-                    b.ToTable("LivroAutor");
-                });
-
-            modelBuilder.Entity("BibliotecaMVC.Models.LivroEmprestimo", b =>
-                {
-                    b.Property<int>("LivroID");
-
-                    b.Property<int>("EmprestimoID");
-
-                    b.HasKey("LivroID", "EmprestimoID");
-
-                    b.HasIndex("EmprestimoID");
-
-                    b.ToTable("LivroEmprestimo");
-                });
-
-            modelBuilder.Entity("BibliotecaMVC.Models.Usuario", b =>
-                {
-                    b.Property<int>("UsuarioID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email")
-                        .IsRequired();
-
-                    b.Property<string>("Nome")
-                        .IsRequired();
-
-                    b.Property<string>("Senha")
-                        .IsRequired();
-
-                    b.Property<string>("Telefone");
-
-                    b.HasKey("UsuarioID");
-
-                    b.ToTable("Usuario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -277,44 +191,6 @@ namespace BibliotecaMVC.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("BibliotecaMVC.Models.Emprestimo", b =>
-                {
-                    b.HasOne("BibliotecaMVC.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("BibliotecaMVC.Models.Usuario", "Usuario")
-                        .WithMany("Emprestimo")
-                        .HasForeignKey("UsuarioID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("BibliotecaMVC.Models.LivroAutor", b =>
-                {
-                    b.HasOne("BibliotecaMVC.Models.Autor", "Autor")
-                        .WithMany("LivroAutor")
-                        .HasForeignKey("AutorID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("BibliotecaMVC.Models.Livro", "Livro")
-                        .WithMany("LivroAutor")
-                        .HasForeignKey("LivroID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("BibliotecaMVC.Models.LivroEmprestimo", b =>
-                {
-                    b.HasOne("BibliotecaMVC.Models.Emprestimo", "Emprestimo")
-                        .WithMany("LivroEmprestimo")
-                        .HasForeignKey("EmprestimoID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("BibliotecaMVC.Models.Livro", "Livro")
-                        .WithMany("LivroEmprestimo")
-                        .HasForeignKey("LivroID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

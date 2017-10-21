@@ -2,6 +2,16 @@
     ViewData["Title"] = "Home Page";
 }
 
+<h2>--- init ---</h2>
+
+<p class="lead">Verifique os livros da nossa Biblioteca abaixo.</p>
+
+<div>
+@await Component.InvokeAsync("ListagemLivros", "")
+</div>
+
+<h2>--- fim ---</h2>
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>

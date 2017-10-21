@@ -11,9 +11,10 @@ using System;
 namespace BibliotecaMVC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171020004527_relacoes")]
+    partial class relacoes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,8 +89,6 @@ namespace BibliotecaMVC.Data.Migrations
                     b.Property<int>("EmprestimoID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ApplicationUserId");
-
                     b.Property<string>("DataDevolucao");
 
                     b.Property<string>("DataFim");
@@ -99,8 +98,6 @@ namespace BibliotecaMVC.Data.Migrations
                     b.Property<int>("UsuarioID");
 
                     b.HasKey("EmprestimoID");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("UsuarioID");
 
@@ -281,10 +278,6 @@ namespace BibliotecaMVC.Data.Migrations
 
             modelBuilder.Entity("BibliotecaMVC.Models.Emprestimo", b =>
                 {
-                    b.HasOne("BibliotecaMVC.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("BibliotecaMVC.Models.Usuario", "Usuario")
                         .WithMany("Emprestimo")
                         .HasForeignKey("UsuarioID")

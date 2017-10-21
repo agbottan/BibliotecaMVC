@@ -37,6 +37,8 @@ namespace BibliotecaMVC
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +58,8 @@ namespace BibliotecaMVC
             }
 
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseAuthentication();
 

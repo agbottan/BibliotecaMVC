@@ -18,6 +18,14 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.Caching.Memory" Version="2.0.0" />
+
+    <!--
+    <DotNetCliToolReference Include="Microsoft.Extensions.Caching.Memory" Version="2.0.0" />
+
+    "Microsoft.Extensions.Caching.Memory": "1.0.0",
+    "Microsoft.AspNetCore.Session": "1.0.0"
+    -->
   </ItemGroup>
 
 </Project>
