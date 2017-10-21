@@ -29,7 +29,8 @@ namespace BibliotecaMVC.Controllers
         {
             List<Emprestimo> listaEmprestimos = new List<Emprestimo>();
 
-            // Verificamos se o usuário está logado
+            // !!!-3 Verificamos se o usuário está logado
+            /*
             if (User.Identity.IsAuthenticated)
             {
                 // Pegar ID do Usuário
@@ -39,6 +40,10 @@ namespace BibliotecaMVC.Controllers
                                     .Where(c => c.ApplicationUserId == userID)
                                     .ToListAsync();
             }
+            */
+
+            // Todos os empréstimos - Sem autenticação
+            listaEmprestimos = await _context.Emprestimo.Include(e => e.Usuario).ToListAsync();
 
             return View("Index", listaEmprestimos);
         }
@@ -180,7 +185,10 @@ namespace BibliotecaMVC.Controllers
         {
             if (id != null)
             {
+                // !!!-3 Emprestimo emprestimo = _context.Emprestimo.FirstOrDefault(e => e.EmprestimoID == id);
+
                 Emprestimo emprestimo = _context.Emprestimo.FirstOrDefault(e => e.EmprestimoID == id);
+
                 emprestimo.DataDevolucao = DateTime.Now.ToString("dd/MM/yyyy");
                 _context.Update(emprestimo);
                 _context.SaveChanges();
