@@ -30,7 +30,49 @@
         </dd>
     </dl>
 </div>
+
+<table class="table">
+<thead>
+<tr>
+<th>Imagem</th>
+<th>T&iacute;tulo</th>
+<th>Autor</th>Página | 6
+</tr>
+</thead>
+<tbody>
+@foreach (var item in Model.LivroEmprestimo)
+{
+<tr>
+<td>
+<img class="card-img-top" src="~/@item.Livro.Foto"
+width="80px" height="40px">
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Livro.Titulo)
+</td>
+<td>
+@foreach (var livroAutor in item.Livro.LivroAutor)
+{
+@Html.DisplayFor(modelItem => livroAutor.Autor.Nome)
+<br />
+}
+</td>
+</tr>
+}
+</tbody>
+</table>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.EmprestimoID">Edit</a> |
     <a asp-action="Index">Back to List</a>
+</div>
+
+<div>
+<a asp-action="Index">Back to List</a>
+<br />
+@if (string.IsNullOrEmpty(Model.DataDevolucao))
+{
+<a asp-action="DevolverLivros" asp-route-id="@Model.EmprestimoID"
+class="btn btn-danger">Devolu&ccedil;&atilde;o</a>
+}
 </div>
