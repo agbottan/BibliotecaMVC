@@ -11,12 +11,6 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Foto)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Foto)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.Quantidade)
         </dt>
         <dd>
@@ -32,31 +26,35 @@
             @Html.DisplayNameFor(model => model.Foto)
         </dt>
         <dd>
-            <img src="~/@Model.Foto" alt="Imagem @Model.Titulo" />
+            <img src="~/@Model.Foto" alt="Exemplo Foto" />
         </dd>
     </dl>
-
     <dl class="dl-horizontal">
-        <dt>Autores</dt>
+        <dt>
+            Autores
+        </dt>
         <dd>
             <table class="table">
                 <thead>
-                    <tr><th>Nome</th></tr>
+                    <tr>
+                        <th>
+                            Nome
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in Model.LivroAutor)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Autor.Nome)
-                        </td>
-                    </tr>
-                }
+                    @foreach (var item in Model.LivroAutor)
+            {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Autor.Nome)
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </dd>
     </dl>
-
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.LivroID">Edit</a> |
