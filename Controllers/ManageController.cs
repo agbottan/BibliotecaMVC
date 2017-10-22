@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using TesteMVC.Models;
-using TesteMVC.Models.ManageViewModels;
-using TesteMVC.Services;
+using BibliotecaMVC.Models;
+using BibliotecaMVC.Models.ManageViewModels;
+using BibliotecaMVC.Services;
 
-namespace TesteMVC.Controllers
+namespace BibliotecaMVC.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
@@ -495,7 +495,7 @@ namespace TesteMVC.Controllers
         {
             return string.Format(
                 AuthenicatorUriFormat,
-                _urlEncoder.Encode("TesteMVC"),
+                _urlEncoder.Encode("BibliotecaMVC"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

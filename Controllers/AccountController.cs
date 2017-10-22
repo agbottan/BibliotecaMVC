@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using TesteMVC.Models;
-using TesteMVC.Models.AccountViewModels;
-using TesteMVC.Services;
+using BibliotecaMVC.Models;
+using BibliotecaMVC.Models.AccountViewModels;
+using BibliotecaMVC.Services;
 
-namespace TesteMVC.Controllers
+namespace BibliotecaMVC.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]

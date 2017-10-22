@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using BibliotecaMVC.Data;
 using BibliotecaMVC.Models;
 
@@ -13,17 +14,31 @@ namespace BibliotecaMVC.Controllers
     public class EmprestimosController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public EmprestimosController(ApplicationDbContext context)
+        public EmprestimosController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
-            _context = context;    
+            _context = context;
+            _userManager = userManager;
         }
 
         // GET: Emprestimos
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Emprestimo.Include(e => e.Usuario);
-            return View(await applicationDbContext.ToListAsync());
+            List<Emprestimo> listaEmprestimos = new List<Emprestimo>();
+
+            // Verificamos se o usuário está logado
+            if (User.Identity.IsAuthenticated)
+            {
+                // Pegar ID do Usuário
+                string userID = _userManager.GetUserId(HttpContext.User);
+
+                listaEmprestimos = await _context.Emprestimo.Include(e => e.Usuario)
+                    .Where(c => c.ApplicationUserId == userID)
+                    .ToListAsync();
+            }
+
+            return View("Index", listaEmprestimos);
         }
 
         // GET: Emprestimos/Details/5
@@ -34,7 +49,13 @@ namespace BibliotecaMVC.Controllers
                 return NotFound();
             }
 
-            var emprestimo = await _context.Emprestimo.SingleOrDefaultAsync(m => m.EmprestimoID == id);
+            var emprestimo = await _context.Emprestimo
+                .Include(e => e.LivroEmprestimo)
+                .ThenInclude(le => le.Livro)
+                .ThenInclude(li => li.LivroAutor)
+                .ThenInclude(la => la.Autor)
+                .SingleOrDefaultAsync(m => m.EmprestimoID == id);
+
             if (emprestimo == null)
             {
                 return NotFound();
@@ -151,6 +172,20 @@ namespace BibliotecaMVC.Controllers
         private bool EmprestimoExists(int id)
         {
             return _context.Emprestimo.Any(e => e.EmprestimoID == id);
+        }
+
+        // Devolver Livro
+        public async Task<IActionResult> DevolverLivros(int? id)
+        {
+        if (id != null)
+        {
+        Emprestimo emprestimo = _context.Emprestimo.FirstOrDefault(e =>
+        e.EmprestimoID == id);
+        emprestimo.DataDevolucao = DateTime.Now.ToString("dd/MM/yyyy");
+        _context.Update(emprestimo);
+        _context.SaveChanges();
+        }
+        return await Index();
         }
     }
 }
