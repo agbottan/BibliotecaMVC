@@ -1,7 +1,10 @@
 @model int
+
 <div class="jumbotron">
     <h1>
-        Error @Model
+        Código @Model
     </h1>
-    <h3>That’s odd... Something we didn't expect happened"</h3>
+    <h3>
+        @(Model == 404 ? "A página solicitada não foi encontrada" : "")
+    </h3>
 </div>
