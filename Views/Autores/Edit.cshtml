@@ -1,0 +1,38 @@
+@model BibliotecaMVC.Models.Autor
+
+@{
+    ViewData["Title"] = "Editar Autor";
+}
+
+<h2 class="tit-pagina">
+    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&ensp;Editar Autor
+</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="AutorID" />
+        <div class="form-group">
+            <label asp-for="Nome" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger" />
+            </div>
+        </div>
+    </div>
+    <p class="acoes-base clearfix">
+        <a asp-action="Index" class="btn btn-primary pull-left">
+            <i class="fa fa-list" aria-hidden="true"></i>
+            &ensp;Voltar para Lista
+        </a>
+        <button type="submit" value="Save" class="btn btn-success" />
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            &ensp;Salvar Alterações
+        </button>
+    </p>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

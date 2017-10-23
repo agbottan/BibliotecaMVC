@@ -1,23 +1,28 @@
-﻿<!DOCTYPE html>
+﻿@{
+    // Marca o menu atual
+    var ativo = "ativo";
+    var path  = Convert.ToString(Context.Request.Path);
+    var secao = path.Substring(path.LastIndexOf('/') + 1);
+
+    string[] paginas = {"Sobre", "Register"};
+    if(!paginas.Contains(secao)) {
+        secao = this.ViewContext.RouteData.Values["controller"].ToString();
+    }
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BibliotecaMVC</title>
-
-    <environment names="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment names="Staging,Production">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+    <title>@ViewData["Title"] - Biblioteca Virtual em Dotnet</title>
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+    <link rel="stylesheet" href="~/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/site-custom.css" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,27 +31,27 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">BibliotecaMVC</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Biblioteca Virtual em Dotnet</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Emprestimos" asp-action="Index">Empréstimos</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastros <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a asp-area="" asp-controller="Livros" asp-action="Index">Livros</a></li>
-                            <li><a asp-area="" asp-controller="Autores" asp-action="Index">Autores</a></li>
-                            <li><a asp-area="" asp-controller="Usuarios" asp-action="Index">Usuários</a></li>
-                        </ul>
+                    <li class="@(secao=="Home"?"ativo":"")">
+                        <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">Sobre</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contato</a></li>
-
-                    <li>
-                        <a asp-area="" asp-controller="Carrinho" asp-action="Index">Carrinho
-                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                        </a>
+                    <li class="@(secao=="Livros"?"ativo":"")">
+                        <a asp-area="" asp-controller="Livros" asp-action="Index">Livros</a>
+                    </li>
+                    <li class="@(secao=="Autores"?"ativo":"")">
+                        <a asp-area="" asp-controller="Autores" asp-action="Index">Autores</a>
+                    </li>
+                    <li class="@(secao=="Usuarios"?"ativo":"")">
+                        <a asp-area="" asp-controller="Usuarios" asp-action="Index">Usuários</a>
+                    </li>
+                    <li class="@(secao=="Emprestimos"?"ativo":"")">
+                        <a asp-area="" asp-controller="Emprestimos" asp-action="Index">Empréstimos</a>
+                    </li>
+                    <li class="@(secao=="Sobre"?"ativo":"")">
+                        <a asp-area="" asp-controller="Home" asp-action="Sobre">Sobre</a>
                     </li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
@@ -55,11 +60,12 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2017 - BibliotecaMVC</p>
-        </footer>
     </div>
+    <footer>
+        <div class="container">
+            <p>&mdash;&emsp;Biblioteca Virtual em Dotnet&emsp;&mdash;</p>
+        </div>
+    </footer>
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

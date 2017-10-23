@@ -1,0 +1,47 @@
+@model BibliotecaMVC.Models.Usuario
+
+@{
+    ViewData["Title"] = "Excluir Usuário";
+}
+
+<h2 class="tit-pagina tit-excluir">
+    <i class="fa fa-user-circle" aria-hidden="true"></i>&ensp;Excluir Usuário
+</h2>
+
+<p class="aviso-excluir">Tem certeza de que deseja <span>excluir</span> este usuário?</p>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Telefone)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <p class="acoes-base clearfix">
+            <a asp-action="Index" class="btn btn-primary pull-left">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                &ensp;Voltar para Lista
+            </a>
+            <button type="submit" value="Delete" class="btn btn-danger" />
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                &ensp;Excluir Usuário
+            </button>
+        </p>
+    </form>
+</div>

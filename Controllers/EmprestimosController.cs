@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using BibliotecaMVC.Data;
 using BibliotecaMVC.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 
 namespace BibliotecaMVC.Controllers
 {
@@ -29,21 +27,16 @@ namespace BibliotecaMVC.Controllers
         {
             List<Emprestimo> listaEmprestimos = new List<Emprestimo>();
 
-            // !!!-3 Verificamos se o usuário está logado
-            /*
+            // Verificamos se o usuário está logado
             if (User.Identity.IsAuthenticated)
             {
                 // Pegar ID do Usuário
                 string userID = _userManager.GetUserId(HttpContext.User);
 
                 listaEmprestimos = await _context.Emprestimo.Include(e => e.Usuario)
-                                    .Where(c => c.ApplicationUserId == userID)
-                                    .ToListAsync();
+                    .Where(c => c.ApplicationUserId == userID)
+                    .ToListAsync();
             }
-            */
-
-            // Todos os empréstimos - Sem autenticação
-            listaEmprestimos = await _context.Emprestimo.Include(e => e.Usuario).ToListAsync();
 
             return View("Index", listaEmprestimos);
         }
@@ -181,19 +174,18 @@ namespace BibliotecaMVC.Controllers
             return _context.Emprestimo.Any(e => e.EmprestimoID == id);
         }
 
+        // Devolver Livro
         public async Task<IActionResult> DevolverLivros(int? id)
         {
-            if (id != null)
-            {
-                // !!!-3 Emprestimo emprestimo = _context.Emprestimo.FirstOrDefault(e => e.EmprestimoID == id);
-
-                Emprestimo emprestimo = _context.Emprestimo.FirstOrDefault(e => e.EmprestimoID == id);
-
-                emprestimo.DataDevolucao = DateTime.Now.ToString("dd/MM/yyyy");
-                _context.Update(emprestimo);
-                _context.SaveChanges();
-            }
-            return await Index();
+        if (id != null)
+        {
+        Emprestimo emprestimo = _context.Emprestimo.FirstOrDefault(e =>
+        e.EmprestimoID == id);
+        emprestimo.DataDevolucao = DateTime.Now.ToString("dd/MM/yyyy");
+        _context.Update(emprestimo);
+        _context.SaveChanges();
+        }
+        return await Index();
         }
     }
 }

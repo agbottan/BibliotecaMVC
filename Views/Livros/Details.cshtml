@@ -1,27 +1,19 @@
 @model BibliotecaMVC.Models.Livro
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do Livro";
 }
 
-<h2>Details</h2>
+<h2 class="tit-pagina">
+    <i class="fa fa-book" aria-hidden="true"></i>&ensp;@ViewData["Title"]
+</h2>
 
 <div>
-    <h4>Livro</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Foto)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Foto)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantidade)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Quantidade)
-        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Titulo)
         </dt>
@@ -32,33 +24,50 @@
             @Html.DisplayNameFor(model => model.Foto)
         </dt>
         <dd>
-            <img src="~/@Model.Foto" alt="Imagem @Model.Titulo" />
+            <img class="foto" src="~/@Model.Foto" alt="Imagem @Model.Titulo" />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantidade)
         </dd>
     </dl>
-
     <dl class="dl-horizontal">
-        <dt>Autores</dt>
+        <dt>
+            Autores
+        </dt>
         <dd>
-            <table class="table">
+            <table class="lista lista-wid-menor">
                 <thead>
-                    <tr><th>Nome</th></tr>
+                    <tr>
+                        <th>Nome</th>
+                    </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in Model.LivroAutor)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Autor.Nome)
-                        </td>
-                    </tr>
-                }
+                    @foreach (var item in Model.LivroAutor)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Autor.Nome)
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </dd>
     </dl>
-
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.LivroID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<p class="acoes-base clearfix">
+    <a asp-action="Index" class="btn btn-primary pull-left">
+        <i class="fa fa-list" aria-hidden="true"></i>
+        &ensp;Voltar para Lista
+    </a>
+    @if (SignInManager.IsSignedIn(User))
+    {
+    <a asp-action="Edit" asp-route-id="@Model.LivroID" class="btn btn-success">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        &ensp;Editar este Livro
+    </a>
+    }
+</p>

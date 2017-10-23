@@ -1,35 +1,31 @@
 @model IEnumerable<BibliotecaMVC.Models.Emprestimo>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Empréstimos em Aberto";
 }
 
-<h2>Index</h2>
+<!-- ABERTOS -->
+<h2 class="tit-pagina">
+    <i class="fa fa-share-alt-square" aria-hidden="true"></i>&ensp;Empréstimos em Aberto
+</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="lista">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DataDevolucao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataFim)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataInicio)
-            </th>
+            <th>Data Inicial</th>
+            <th>Data Final</th>
+            <th>Data de Devolução</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
+    @if (string.IsNullOrEmpty(item.DataDevolucao))
+    {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataDevolucao)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataFim)
             </td>
@@ -37,13 +33,85 @@
                 @Html.DisplayFor(modelItem => item.DataInicio)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.EmprestimoID">Details</a>
+                @Html.DisplayFor(modelItem => item.DataDevolucao)
+            </td>
+            <td class="bt-acoes">
+                <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.EmprestimoID">
+                    <i class="fa fa-share-alt-square" aria-hidden="true"></i>&ensp;detalhes</a>
+                @if (SignInManager.IsSignedIn(User))
+                {
                 <!--
-                | <a asp-action="Edit" asp-route-id="@item.EmprestimoID">Edit</a>
-                | <a asp-action="Delete" asp-route-id="@item.EmprestimoID">Delete</a>
+                <a class="btn btn-sm btn-success" asp-action="Edit" asp-route-id="@item.EmprestimoID">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&ensp;editar</a>
                 -->
+                <a asp-action="DevolverLivros" asp-route-id="@item.EmprestimoID" class="btn btn-sm btn-warning">
+                    <i class="fa fa-handshake-o" aria-hidden="true"></i>&ensp;Devolu&ccedil;&atilde;o</a>
+                <!--
+                <a class="btn btn-sm btn-danger"  asp-action="Delete" asp-route-id="@item.EmprestimoID">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>&ensp;excluir</a>
+                -->
+                }
             </td>
         </tr>
+    }
 }
     </tbody>
 </table>
+<br>
+
+<!-- DEVOLVIDOS -->
+<h2 class="tit-pagina">
+    <i class="fa fa-handshake-o" aria-hidden="true"></i>&ensp;Empréstimos Devolvidos
+</h2>
+
+<table class="lista">
+    <thead>
+        <tr>
+            <th>Data Inicial</th>
+            <th>Data Final</th>
+            <th>Data de Devolução</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    @if (!string.IsNullOrEmpty(item.DataDevolucao))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDevolucao)
+            </td>
+            <td class="bt-acoes">
+                <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.EmprestimoID">
+                    <i class="fa fa-share-alt-square" aria-hidden="true"></i>&ensp;detalhes</a>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                <!--
+                <a class="btn btn-sm btn-success" asp-action="Edit" asp-route-id="@item.EmprestimoID">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&ensp;editar</a>
+                -->
+                <a class="btn btn-sm btn-danger"  asp-action="Delete" asp-route-id="@item.EmprestimoID">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>&ensp;excluir</a>
+                }
+            </td>
+        </tr>
+    }
+}
+    </tbody>
+</table>
+
+<p class="acoes-base clearfix">
+    @if (SignInManager.IsSignedIn(User))
+    {
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fa fa-share-alt-square" aria-hidden="true"></i>
+        &ensp;Cadastrar Novo Empréstimo
+    </a>
+    }
+</p>

@@ -1,0 +1,290 @@
+
+body {
+    padding-top: 50px;
+    background-color: #ddd;
+}
+
+h2 {
+    color: #666;
+}
+
+hr {
+    border-color: #ddd;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding: 15px 50px 0;
+    background-color: #fff;
+    min-height: 500px;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+
+/* --- LAYOUT --- */
+
+.navbar {
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 2px 1px rgba(0,0,0,0.1);
+}
+
+.navbar-toggle {
+    background-color: #ddd;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: #999;
+}
+
+.navbar-brand {
+    color: #999;
+    margin-right: 15px;
+}
+
+.navbar-brand:hover {
+    color: #666;
+}
+
+.navbar-nav {
+    border-left: 1px #ddd solid;
+}
+
+.navbar-nav li {
+    border-right: 1px #ddd solid;
+}
+
+.navbar-nav li.ativo {
+    background-color: #eee;
+}
+
+.navbar-nav li:hover {
+    background-color: #f6f6f6;
+}
+
+footer {
+    text-align: center;
+}
+
+footer .container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #eee;
+    color: #666;
+}
+
+footer p {
+    margin: 0;
+}
+
+
+/* --- GERAIS --- */
+
+.btn .fa {
+    position: relative;
+}
+
+.tit-pagina {
+    color: #314e7b;
+    margin-bottom: 30px;
+    font-size: 25px;
+}
+
+/*
+.tit-excluir {
+    color: #c00;
+}
+*/
+
+.filtro {
+    margin-bottom: 30px;
+    border: 1px #ddd solid;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.filtro p {
+    margin-bottom: 0;
+}
+
+.acoes-base {
+    margin: 20px 0 30px;
+    text-align: right;
+    padding: 0 5px;
+}
+
+.acoes-base .btn {
+    margin: 0 5px;
+}
+
+.aviso-excluir {
+    background-color: #f6f6f6;
+    border-top: #ddd 1px solid;
+    border-bottom: #ddd 1px solid;
+    padding: 10px;
+    font-size: 120%;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.aviso-excluir span {
+    color: #c00;
+}
+
+
+/* --- CÓDIGO HTTP --- */
+
+.cod {
+    text-align: center;
+}
+
+.cod h2 {
+    font-size: 40px;
+}
+
+.cod h2,
+.cod h3 {
+    color: #314e7b;
+}
+
+
+/* --- LISTAGENS --- */
+
+.lista {
+    width: 100%;
+    border: 1px #ccc solid;
+}
+
+.lista-wid-menor {
+    width: 70%;
+}
+
+.lista th,
+.lista td {
+    padding: 10px 20px;
+}
+
+.lista th {
+    background-color: #ddd;
+}
+
+.lista tr:nth-child(2n) td {
+    background-color: #eee;
+}
+
+.lista .bt-acoes {
+    text-align: right;
+}
+
+.lista .bt-acoes .btn {
+    margin: 0 4px;
+}
+
+.dl-horizontal dt,
+.dl-horizontal dd {
+    padding-bottom: 15px;
+}
+
+
+/* --- FORMULÁRIOS --- */
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+select,
+textarea {
+    background-color: #fff;
+    border: 1px #ccc solid;
+    border-radius: 5px;
+
+    box-shadow: inset 0 0 2px rgba(0,0,0,.2);
+    color: #444;
+
+    width: 500px !important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus {
+
+  outline: none !important;
+  border-color: #999;
+  background-color: #fafafa;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+select {
+    height: 33px;
+    line-height: 33px;
+    padding: 0 10px;
+}
+
+textarea {
+    resize: none;
+    padding: 10px;
+    height: 100px;
+}
+
+input[type="number"] {
+    width: 100px;
+}
+
+.checks input[type="checkbox"] {
+    position: relative;
+    top: 3px;
+}
+.checks p {
+    margin-bottom: 3px;
+}
+
+.form-group {
+    border-bottom: #ddd 1px solid;
+    padding-bottom: 15px;
+}
+
+.foto {
+    float: left;
+    max-height: 200px;
+}
+
+
+/* --- HOME --- */
+
+.tit-home {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.tit-home span {
+    color: #314e7b;
+}
+
+.livros-home .card {
+    margin-bottom: 30px;
+    min-height: 170px;
+}
+
+.livros-home .card-img-top {
+    float: left;
+    max-height: 150px;
+    border: #ccc 1px solid;
+    padding: 3px;
+    margin-right: 20px;
+}
+
+.livros-home h4 {
+    margin-top: 0;
+    line-height: 1.2em;
+    min-height: 70px;
+    color: #314e7b;
+    font-weight: bold;
+    font-size: 17px;
+}

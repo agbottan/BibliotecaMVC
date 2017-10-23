@@ -1,0 +1,37 @@
+@model BibliotecaMVC.Models.Usuario
+
+@{
+    ViewData["Title"] = "Cadastrar Novo Usuário";
+}
+
+<h2 class="tit-pagina">
+    <i class="fa fa-user-circle" aria-hidden="true"></i>&ensp;Cadastrar Novo Usuário
+</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Nome" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger" />
+            </div>
+        </div>
+    </div>
+    <p class="acoes-base clearfix">
+        <a asp-action="Index" class="btn btn-primary pull-left">
+            <i class="fa fa-list" aria-hidden="true"></i>
+            &ensp;Voltar para Lista
+        </a>
+        <button type="submit" value="Create" class="btn btn-success" />
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
+            &ensp;Cadastrar Novo Usuário
+        </button>
+    </p>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -57,6 +57,9 @@ namespace BibliotecaMVC
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            // Páginas de erro com status
+            app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
+
             app.UseStaticFiles();
 
             app.UseSession();

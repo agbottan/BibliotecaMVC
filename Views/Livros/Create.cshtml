@@ -1,15 +1,16 @@
 @model BibliotecaMVC.Models.Livro
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Cadastrar Novo Livro";
 }
 
-<h2>Create</h2>
+<h2 class="tit-pagina">
+    <i class="fa fa-book" aria-hidden="true"></i>&ensp;Cadastrar Novo Livro
+</h2>
 
 <form asp-action="Create" enctype="multipart/form-data">
     <div class="form-horizontal">
-        <h4>Livro</h4>
-        <hr />
+        <hr>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Titulo" class="col-md-2 control-label"></label>
@@ -34,27 +35,28 @@
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">Autores</label>
-            <div class="col-md-10">
+            <div class="col-md-10 checks">
                 @foreach (var item in ViewBag.Autores)
                 {
-                    <input type="checkbox"
-                        name="selectedAutores"
-                        value="@item.Value" />@item.Text
-                    <br />
+                    <p>
+                        <input type="checkbox" name="selectedAutores" value="@item.Value" />
+                        <span>@item.Text</span>
+                    </p>
                 }
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
+    <p class="acoes-base clearfix">
+        <a asp-action="Index" class="btn btn-primary pull-left">
+            <i class="fa fa-list" aria-hidden="true"></i>
+            &ensp;Voltar para Lista
+        </a>
+        <button type="submit" value="Create" class="btn btn-success" />
+            <i class="fa fa-book" aria-hidden="true"></i>
+            &ensp;Cadastrar Novo Livro
+        </button>
+    </p>
 </form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
