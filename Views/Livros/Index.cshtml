@@ -1,33 +1,35 @@
 @model IEnumerable<BibliotecaMVC.Models.Livro>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-
-<form asp-action="Index" method="get">
+<h2 class="tit-pagina">
+    <i class="fa fa-book" aria-hidden="true"></i>&ensp;Livros Cadastrados
+</h2>
+<form asp-action="Index" method="get" class="filtro">
     <div class="form-actions no-color">
         <p>
-            @Html.DisplayNameFor(model => model.Titulo):&nbsp;<input type="text" name="filtroPesquisa" value="@ViewBag.filtroPesquisa" />
-            <input type="submit" value="Pesquisar" class="btn btn-default" /> |
-            <a asp-action="Index">Limpar</a>
+            @Html.DisplayNameFor(model => model.Titulo):&emsp;
+            <input type="text" name="filtroPesquisa" value="@ViewBag.filtroPesquisa" />&emsp;
+            <button type="submit" class="btn btn-info">Pesquisar&ensp;<i class="fa fa-search" aria-hidden="true"></i></button>
+            &emsp;
+            <a asp-action="Index" class="btn btn-default">Limpar&ensp;<i class="fa fa-eraser" aria-hidden="true"></i></a>
         </p>
     </div>
 </form>
 
-<table class="table">
+<table class="lista">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Quantidade)
+                <a asp-action="Index" asp-route-ordenacao="@ViewBag.TituloSortParm">@Html.DisplayNameFor(model => model.Titulo)</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-ordenacao="@ViewBag.TituloSortParm">@Html.DisplayNameFor(model => model.Titulo)</a>
+                @Html.DisplayNameFor(model => model.Quantidade)
             </th>
             <th></th>
         </tr>
@@ -36,17 +38,34 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Quantidade)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Titulo)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.LivroID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.LivroID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.LivroID">Delete</a>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td class="bt-acoes">
+                <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.LivroID">
+                    <i class="fa fa-book" aria-hidden="true"></i>&ensp;detalhes</a>
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                <a class="btn btn-sm btn-success" asp-action="Edit" asp-route-id="@item.LivroID">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&ensp;editar</a>
+                <a class="btn btn-sm btn-danger"  asp-action="Delete" asp-route-id="@item.LivroID">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>&ensp;excluir</a>
+                }
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<p class="acoes-base clearfix">
+    @if (SignInManager.IsSignedIn(User))
+    {
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fa fa-book" aria-hidden="true"></i>
+        &ensp;Cadastrar Novo Livro
+    </a>
+    }
+</p>

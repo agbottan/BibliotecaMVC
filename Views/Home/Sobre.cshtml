@@ -1,7 +1,32 @@
 ﻿@{
-    ViewData["Title"] = "Sobre";
+    ViewData["Title"] = "Sobre o Projeto";
 }
-<h2>@ViewData["Title"].</h2>
-<h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+<h2 class="tit-pagina">@(ViewData["Title"])</h2>
+
+<p>Olá prof. Vitor!</p>
+
+<p>Para se logar, use <strong>admin@teste.com</strong> e <strong>123-DotNet</strong></p>
+
+<hr>
+
+<p>Vou expor aqui algumas questões que tive com o projeto.</p>
+
+<p>Fiz no Linux, então não usei as ferramentas de menu do Visual Studio. Usei o Dotnet CLI e o código que o senhor disponibilizou como referência.</p>
+
+<p>Usei a versão <strong>2.0.0</strong> do Dotnet Framework, e creio que o senhor tenha usado a versão 1.0.0, então pode haver alguma disparidade na hora de rodar o projeto.</p>
+
+<p>Usei o SQLite como banco de dados, que era a opção default do Dotnet, e não o MsSQL Server.</p>
+<p>Como o SQLite não suporta chaves estrangeiras, tive problemas com as migrations. Então criei minhas tabelas sem as chaves estrangeiras.</p>
+
+<p>Coloquei a listagem, edição e deleção de 'Usuário' e 'Autor', mas estou ciente de que, ao deletarmos um usuário, os empréstimos relacionados a ele ficarão corrompidos e, ao deletarmos um autor, ficarão corrompidos os livros desse autor. Não tratei essa situação.</p>
+
+<p>Coloquei o Código http:404 pra cair numa página de erro específica.</p>
+
+<p>Traduzi pra PT-BR, mas não tudo (faltou bastante coisa na parte de Login e SignIn). Também mexi no CSS.</p>
+
+<hr>
+
+<p>Obrigado!</p>
+<br>
+<br>

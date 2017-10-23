@@ -1,15 +1,17 @@
 @model IEnumerable<BibliotecaMVC.Models.Usuario>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2 class="tit-pagina">
+    <i class="fa fa-user-circle" aria-hidden="true"></i>&ensp;Usuários Cadastrados
+</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="lista">
     <thead>
         <tr>
             <th>
@@ -36,12 +38,28 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Telefone)
             </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.UsuarioID">Details</a>
-                | <a asp-action="Edit" asp-route-id="@item.UsuarioID">Edit</a>
-                | <a asp-action="Delete" asp-route-id="@item.UsuarioID">Delete</a>
+            <td class="bt-acoes">
+                <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.UsuarioID">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>&ensp;detalhes</a>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                <a class="btn btn-sm btn-success" asp-action="Edit" asp-route-id="@item.UsuarioID">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&ensp;editar</a>
+                <a class="btn btn-sm btn-danger"  asp-action="Delete" asp-route-id="@item.UsuarioID">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>&ensp;excluir</a>
+                }
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<p class="acoes-base clearfix">
+    @if (SignInManager.IsSignedIn(User))
+    {
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fa fa-user-circle" aria-hidden="true"></i>
+        &ensp;Cadastrar Novo Usuário
+    </a>
+    }
+</p>

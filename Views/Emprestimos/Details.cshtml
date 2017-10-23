@@ -1,41 +1,32 @@
 @model BibliotecaMVC.Models.Emprestimo
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do Empréstimo";
 }
 
-<h2>Details</h2>
+<h2 class="tit-pagina">
+    <i class="fa fa-share-alt-square" aria-hidden="true"></i>&ensp;Detalhes do Empréstimo
+</h2>
 
 <div>
-    <h4>Emprestimo</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DataDevolucao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DataDevolucao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DataFim)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DataFim)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DataInicio)
-        </dt>
+        <dt>Data Inicial</dt>
         <dd>
             @Html.DisplayFor(model => model.DataInicio)
         </dd>
+        <dt>Data Final</dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataFim)
+        </dd>
+        <dt>Data de Devolução</dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataDevolucao)
+        </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.EmprestimoID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
 
-<table class="table">
+<table class="lista">
 <thead>
 <tr>
 <th>Imagem</th>
@@ -48,8 +39,7 @@
 {
 <tr>
 <td>
-<img class="card-img-top" src="~/@item.Livro.Foto"
-width="80px" height="40px">
+<img class="card-img-top" src="~/@item.Livro.Foto" height="80px">
 </td>
 <td>
 @Html.DisplayFor(modelItem => item.Livro.Titulo)
@@ -65,14 +55,21 @@ width="80px" height="40px">
 }
 </tbody>
 </table>
+<br>
 
-
-<div>
-<a asp-action="Index">Back to List</a>
-<br />
-@if (string.IsNullOrEmpty(Model.DataDevolucao))
-{
-<a asp-action="DevolverLivros" asp-route-id="@Model.EmprestimoID"
-class="btn btn-danger">Devolu&ccedil;&atilde;o</a>
-}
-</div>
+<p class="acoes-base clearfix">
+    <a asp-action="Index" class="btn btn-primary pull-left">
+        <i class="fa fa-list" aria-hidden="true"></i>
+        &ensp;Voltar para Lista
+    </a>
+    <a asp-action="Edit" asp-route-id="@Model.EmprestimoID" class="btn btn-success pull-left">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        &ensp;Editar este Empréstimo
+    </a>
+    @if (string.IsNullOrEmpty(Model.DataDevolucao))
+    {
+        <a asp-action="DevolverLivros" asp-route-id="@Model.EmprestimoID" class="btn btn-warning">
+        <i class="fa fa-handshake-o" aria-hidden="true"></i>
+        &ensp;Devolu&ccedil;&atilde;o</a>
+    }
+</p>

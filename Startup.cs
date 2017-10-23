@@ -58,7 +58,7 @@ namespace BibliotecaMVC
             }
 
             // Páginas de erro com status
-            // app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
+            app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
 
             app.UseStaticFiles();
 

@@ -1,14 +1,15 @@
 @model BibliotecaMVC.Models.Autor
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Cadastrar Novo Autor";
 }
 
-<h2>Create</h2>
+<h2 class="tit-pagina">
+    <i class="fa fa-address-book" aria-hidden="true"></i>&ensp;Cadastrar Novo Autor
+</h2>
 
 <form asp-action="Create">
     <div class="form-horizontal">
-        <h4>Autor</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -18,17 +19,18 @@
                 <span asp-validation-for="Nome" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
+    <p class="acoes-base clearfix">
+        <a asp-action="Index" class="btn btn-primary pull-left">
+            <i class="fa fa-list" aria-hidden="true"></i>
+            &ensp;Voltar para Lista
+        </a>
+        <button type="submit" value="Create" class="btn btn-success" />
+            <i class="fa fa-address-book" aria-hidden="true"></i>
+            &ensp;Cadastrar Novo Autor
+        </button>
+    </p>
 </form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

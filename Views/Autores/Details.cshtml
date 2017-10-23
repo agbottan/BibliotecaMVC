@@ -1,13 +1,17 @@
 @model BibliotecaMVC.Models.Autor
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do Autor";
 }
 
-<h2>Details</h2>
+<h2 class="tit-pagina">
+    <i class="fa fa-address-book" aria-hidden="true"></i>&ensp;Detalhes do Autor
+</h2>
 
 <div>
-    <h4>Autor</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -17,8 +21,17 @@
             @Html.DisplayFor(model => model.Nome)
         </dd>
     </dl>
-    <div class="form-actions no-color">
-        <a asp-action="Edit" asp-route-id="@Model.AutorID">Edit</a> |
-        <a asp-action="Index">Back to List</a>
-    </div>
-<div>
+</div>
+<p class="acoes-base clearfix">
+    <a asp-action="Index" class="btn btn-primary pull-left">
+        <i class="fa fa-list" aria-hidden="true"></i>
+        &ensp;Voltar para Lista
+    </a>
+    @if (SignInManager.IsSignedIn(User))
+    {
+    <a asp-action="Edit" asp-route-id="@Model.AutorID" class="btn btn-success">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        &ensp;Editar este Autor
+    </a>
+    }
+</p>

@@ -1,4 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@{
+    // Marca o menu atual
+    var ativo = "ativo";
+    var path  = Convert.ToString(Context.Request.Path);
+    var secao = path.Substring(path.LastIndexOf('/') + 1);
+
+    string[] paginas = {"Sobre", "Register"};
+    if(!paginas.Contains(secao)) {
+        secao = this.ViewContext.RouteData.Values["controller"].ToString();
+    }
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -24,12 +35,24 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Livros" asp-action="Index">Livros</a></li>
-                    <li><a asp-area="" asp-controller="Autores" asp-action="Index">Autores</a></li>
-                    <li><a asp-area="" asp-controller="Usuarios" asp-action="Index">Usuários</a></li>
-                    <li><a asp-area="" asp-controller="Emprestimos" asp-action="Index">Empréstimos</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Sobre">Sobre</a></li>
+                    <li class="@(secao=="Home"?"ativo":"")">
+                        <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="@(secao=="Livros"?"ativo":"")">
+                        <a asp-area="" asp-controller="Livros" asp-action="Index">Livros</a>
+                    </li>
+                    <li class="@(secao=="Autores"?"ativo":"")">
+                        <a asp-area="" asp-controller="Autores" asp-action="Index">Autores</a>
+                    </li>
+                    <li class="@(secao=="Usuarios"?"ativo":"")">
+                        <a asp-area="" asp-controller="Usuarios" asp-action="Index">Usuários</a>
+                    </li>
+                    <li class="@(secao=="Emprestimos"?"ativo":"")">
+                        <a asp-area="" asp-controller="Emprestimos" asp-action="Index">Empréstimos</a>
+                    </li>
+                    <li class="@(secao=="Sobre"?"ativo":"")">
+                        <a asp-area="" asp-controller="Home" asp-action="Sobre">Sobre</a>
+                    </li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
